@@ -18,26 +18,26 @@ import Coordinator from './classes/Coordinator.js';
     /*---------------------------------------*/
     //* COORDINATOR's CUCEI */
     /*---------------------------------------*/ 
-    const urlCucei = 'http://www.cucei.udg.mx/es/directorio/Coordinaci%C3%B3n-de-Control-Escolar';
-    const $ = await request({
-        uri: urlCucei,
-        transform: body => cheerio.load(body)
-    }); 
+    // const urlCucei = 'http://www.cucei.udg.mx/es/directorio/Coordinaci%C3%B3n-de-Control-Escolar';
+    // const $ = await request({
+    //     uri: urlCucei,
+    //     transform: body => cheerio.load(body)
+    // }); 
 
     //* ---- EL chido ---- *//
-    const coordinators = [];
-    $('.item-list').each((i, element) => {
-        const boss = $(element).find('h3').text();
-        const role = $(element).find('ul li .views-field-field-puesto-directorio').text().trim();
-        const name = $(element).find('ul li .views-field-title span a').text().trim();
-        const phoneNumber = $(element).find('ul li .views-field-field-conmutador').text().trim();
+    // const coordinators = [];
+    // $('.item-list').each((i, element) => {
+    //     const boss = $(element).find('h3').text();
+    //     const role = $(element).find('ul li .views-field-field-puesto-directorio').text().trim();
+    //     const name = $(element).find('ul li .views-field-title span a').text().trim();
+    //     const phoneNumber = $(element).find('ul li .views-field-field-conmutador').text().trim();
         
-        const coordinator = {boss, role, phoneNumber, name};
-        coordinators.push(coordinator);
-        console.log(boss);
-    });
+    //     const coordinator = {boss, role, phoneNumber, name};
+    //     coordinators.push(coordinator);
+    //     console.log(boss);
+    // });
     
-    console.log(coordinators);
+    // console.log(coordinators);
     /*---------------------------------------*/
     //* NEW's CUCEI */
     /*---------------------------------------*/ 
@@ -67,9 +67,10 @@ import Coordinator from './classes/Coordinator.js';
     // }); 
 
     // const socialMedias = [];
-    // const caja = $('.node-page .btn-red').each((i, element) => {
+    // $('.node-page .btn-red').each((i, element) => {
     //     const link = $(element).find('a').attr('href');
-    //     socialMedias.push( {link} );
+    //     const name = link.split('//')[1].split('.')[0];
+    //     socialMedias.push( {link, name} );
     // });
     // console.log(socialMedias);
 
@@ -82,8 +83,8 @@ import Coordinator from './classes/Coordinator.js';
     //     transform: body => cheerio.load(body)
     // }); 
 
-    // const caja = $('.region-footer-second-inner .content strong').text().trim();
-    // console.log(caja);
+    // const phoneNumber = $('.region-footer-second-inner .content strong').text().trim();
+    // console.log(phoneNumber);
 
     /*---------------------------------------*/
     //* OFERTA ACADEMICA | LICENCIATURAS */
@@ -94,12 +95,11 @@ import Coordinator from './classes/Coordinator.js';
     //     transform: body => cheerio.load(body)
     // }); 
 
-    // const caja = $('td').next().html();
     // let counter=0;
     // const carreras = [];
-    // const caja = $('td').each( (i, element) => {
+    // $('td').each( (i, element) => {
     //     const lince = $(element).find('a').text().trim();
-    //     if( i%2!=0) {
+    //     if( i%2 !==0) {
     //         counter++;
     //         carreras.push( {lince} );            
     //     }        
@@ -110,22 +110,25 @@ import Coordinator from './classes/Coordinator.js';
     /*---------------------------------------*/
     //* POSGRADOS (MAESTRIAS & DOCTORADOS) */
     /*---------------------------------------*/
-    // const urlCucei = 'http://www.cucei.udg.mx/es/oferta-academica/posgrados';
-    // const $ = await request({
-    //     uri: urlCucei,
-    //     transform: body => cheerio.load(body)
-    // }); 
+    const urlCucei = 'http://www.cucei.udg.mx/es/oferta-academica/posgrados';
+    const $ = await request({
+        uri: urlCucei,
+        transform: body => cheerio.load(body)
+    }); 
 
-    // $('.list ul li').each( (i, element) => {
-    //     const lince = $(element).text().trim();
-    //     if( lince[0] === 'D' || lince[0] === 'd' ) {
-    //         console.log({lince});
-    //     }
-    // });
+    //* M | D
+    let filtro = 'M';
+    $('.list ul li').each( (i, element) => {
+        const posgrado = $(element).text().trim();
+        if( posgrado[0] === filtro || posgrado[0] === filtro ) {
+            //* Doctorado
+            console.log({posgrado});
+        }
+    });
 
 
     /*---------------------------------------*/
-    //* POSGRADOS (MAESTRIAS & DOCTORADOS) */
+    //* DIPLOMADOS) */
     /*---------------------------------------*/
     // const urlCucei = 'http://www.cucei.udg.mx/es/oferta-academica/educacion-continua';
     // const $ = await request({
